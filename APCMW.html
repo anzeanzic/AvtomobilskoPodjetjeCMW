@@ -1,0 +1,43 @@
+<html>
+	<head>
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+		<script type="text/javascript" src="APCMW.js"></script>
+		<style>
+			.car, .timeslot { position: relative; display: inline-block; height: 220px; vertical-align: top; }
+			.car { width: 40%; }
+		</style>
+	</head>
+	<body ng-app="APCMW">
+	 	<div class="container" ng-controller="HttpController" style="margin-left: 10px;">
+	 		<div class="row">
+	 			<div class="col-xs-12">
+	 				<h1>Avtomobilsko podjetje CMW</h1>
+					<div ng-repeat="timeslot in timeslotsArray">
+						<div class="well">
+							<div class="car">
+								<p>
+									<strong>{{ carsArray[timeslot.carId - 1].brand }} {{ carsArray[timeslot.carId - 1].name }}</strong> 
+									Type: {{ carsArray[timeslot.carId - 1].type }} Color: {{ carsArray[timeslot.carId - 1].color }}
+								</p>
+								<p><img ng-src="{{ carsArray[timeslot.carId - 1].image }}" /></p>
+							</div>
+							<div class="timeslot">
+								<p><label>Date:</label> {{ timeslot.date }}</p>
+								<p><label>Time:</label> {{ timeslot.time }}</p>
+								<p><label>Duration:</label> {{ timeslot.duration }}</p>
+								<p><label>Location:</label> {{ timeslot.location }}</p>
+								<p><label>Contact:</label> <a href="mailto:{{ timeslot.contactEmail }}">{{ timeslot.contactEmail }}</a></p>
+								<button ng-hide="{{ timeslot.reserved }}" class="btn btn-primary" ng-click="reserveTimeslot(timeslot.id)">Rezerviraj termin!</button>
+							</div>
+						</div>
+					</div>
+	 			</div>
+	 		</div>
+	 	</div>
+	</body>
+</html>
